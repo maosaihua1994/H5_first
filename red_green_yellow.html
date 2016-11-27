@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+		}
+		canvas{
+			background:skyblue;
+			/*width: 180px;
+			height: 500px;*/
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="1000" height="500">
+		
+	</canvas>
+	<script type="text/javascript">
+		var myCanvas = document.getElementById("myCanvas");
+		var ca = myCanvas.getContext("2d");
+		// 先画一个矩形ca.clearRect(0,0,140,500);
+			
+		
+
+		function getGreen(){
+			ca.clearRect(0,0,300,500);
+			ca.beginPath();
+			ca.fillStyle = "green";
+			ca.arc(60,200,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.font = "40px 黑体";
+			ca.lineWidth =1;
+			ca.strokeText("绿灯行！",0,450);
+			ca.closePath();
+			
+			// 先画一个矩形ca.clearRect(0,0,140,500);
+			ca.beginPath();
+			ca.fillStyle = "#000";
+			ca.fillRect(0,0,140,400);
+			ca.fill();
+
+			//画一个圆
+			ca.fillStyle = "#808080";
+			ca.arc(60,60,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.stroke();
+			ca.closePath();
+			// 第二个圆
+			ca.beginPath();
+			ca.fillStyle = "green";
+			ca.arc(60,200,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+			// 第三个圆
+			ca.beginPath();
+			ca.fillStyle = "#808080";
+			ca.arc(60,340,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+		}
+		setInterval("getGreen()",3000);
+
+		function getYellow(){
+			ca.clearRect(0,0,300,500);
+			ca.beginPath();
+			ca.fillStyle = "yellow";
+			ca.arc(60,340,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.font = "40px 黑体";
+			ca.lineWidth =1;
+			ca.strokeText("黄灯等一等！",0,450);
+			ca.closePath();
+			// 先画一个矩形ca.clearRect(0,0,140,500);
+			ca.beginPath();
+			ca.fillStyle = "#000";
+			ca.fillRect(0,0,140,400);
+			ca.fill();
+
+			//画一个圆
+			ca.fillStyle = "#808080";
+			ca.arc(60,60,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.stroke();
+			ca.closePath();
+			// 第二个圆
+			ca.beginPath();
+			ca.fillStyle = "#808080";
+			ca.arc(60,200,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+			// 第三个圆
+			ca.beginPath();
+			ca.fillStyle = "yellow";
+			ca.arc(60,340,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+		}
+		setInterval("getYellow()",6000);
+			getRed();
+		function getRed(){
+			ca.clearRect(0,0,300,500);
+			ca.beginPath();
+			ca.fillStyle = "red";
+			ca.arc(60,60,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.font = "40px 黑体";
+			ca.lineWidth = 1;
+			ca.strokeText("红灯停！",0,450);
+			ca.stroke();
+			ca.closePath();
+			ca.beginPath();
+			ca.fillStyle = "#000";
+			ca.fillRect(0,0,140,400);
+			ca.fill();
+
+			//画一个圆
+			ca.fillStyle = "red";
+			ca.arc(60,60,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.stroke();
+			ca.closePath();
+			// 第二个圆
+			ca.beginPath();
+			ca.fillStyle = "#808080";
+			ca.arc(60,200,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+			// 第三个圆
+			ca.beginPath();
+			ca.fillStyle = "#808080";
+			ca.arc(60,340,50,0*Math.PI/180,360*Math.PI/180,false);
+			ca.fill();
+			ca.closePath();
+		}
+		setInterval("getRed()",9000);
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{	
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="600" id="myCanvas">
+		
+	</canvas>
+	<script type="text/javascript">
+		var myCanvas = document.getElementById("myCanvas");
+		var ca = myCanvas.getContext("2d");
+		for(var i=0;i<=50;i++){
+			ca.beginPath();
+			ca.scale(0.95,0.95);
+			ca.rotate(15*Math.PI/180);
+			ca.fillStyle="rgba(255,0,0,0.5)";
+			ca.fillRect(400,40,100,50);
+			// 先定义一个旋转15度的矩形
+			 ca.translate(65,-70);
+			// 设置旋转点，旋转点为465，-30
+			ca.fill();
+			ca.closePath();
+		}
+	</script>
+</body>
+</html>

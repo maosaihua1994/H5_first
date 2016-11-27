@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+		}
+		ul{
+			list-style-type:none;
+		}
+		#left ul li{
+		background:red;
+		margin:20px 0px 0px 100px;
+		}
+		#left ul li span{
+			margin:0px;
+			font-size: 13px;
+		}
+		#left{
+			width: 25%;
+			height:1000px;
+			float: left;
+			margin: 20px 30px 0px 30px;
+			border: 5px #BADEEA dotted;
+		}
+		#right{
+			width:50%;
+			height:1000px;
+			float: right;
+			margin:20px 50px 0px 0px;
+			border:5px solid #90EE90;
+		}
+		h2{
+			margin:20px 0px;
+		}
+		ul li img{
+			width:130px;
+			height: 130px;	
+		}
+		#right ul li{
+
+			display: inline-block;
+			padding:10px;
+			margin:10px;
+			background:blue;
+		}
+		#right ul li span{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="left">
+		<h2>今日菜单</h2>
+		<ul id="left_menu">
+			<li draggable="true"   ondragstart="moveB(event);" id="img1">
+				 <img src="./img/1.jpg" alt="" draggable="false">
+				<span>山楂</span>
+			</li>
+			<li draggable="true"   ondragstart="moveB(event);" id="img2" >
+				<img src="./img/2.jpg" alt="" draggable="false">
+				<span>腊八粥</span>
+			</li>
+			<li draggable="true"   ondragstart="moveB(event);" id="img3">
+				<img src="./img/3.jpg" alt="" draggable="false">
+				<span>炖蛋</span>
+			</li>
+			<li draggable="true"   ondragstart="moveB(event);" id="img4">
+				<img src="./img/4.jpg" alt="" draggable="false">
+				<span>梅花糕</span>
+			</li>
+			<li draggable="true"   ondragstart="moveB(event);" id="img5">
+				<img src="./img/5.jpg" alt="" draggable="false">
+				<span>爱心蛋卷</span>
+			</li>
+		</ul>
+	</div>
+	<div id="right">
+		<h2>点菜</h2>
+		<ul id="right_menu" draggable="true">
+		</ul>
+	</div>
+	<script type="text/javascript">
+		function moveB(e){
+			console.log(e)
+			e.dataTransfer.setData("text/plain",e.target.id);
+			console.log("e.target.id=="+e.target.id);
+		} 
+		console.log(left);
+		var right = document.getElementById("right");
+		var right_menu = document.getElementById("right_menu");
+		var left = document.getElementById("left");
+		var left_menu = document.getElementById("left_menu");
+		// 左边的图片移到右边
+		right.addEventListener("drop",function(e){
+			var id = e.dataTransfer.getData("text/plain");
+			console.log("保存的id值为"+id);
+			var r = document.getElementById(id);
+			console.log("r得值为",r);
+			left_menu.removeChild(r);
+			right_menu.appendChild(r);
+			e.preventDefault();
+		    //在Firefox中阻止新页面的打开
+		    e.stopPropagation();
+		},false);
+		// 右边的图片移到左边
+		left.addEventListener("drop",function(e){
+			var id = e.dataTransfer.getData("text/plain");
+			var r = document.getElementById(id);
+			right_menu.removeChild(r);
+			left_menu.appendChild(r);
+			e.preventDefault();
+		    //在Firefox中阻止新页面的打开
+		    e.stopPropagation();
+		},false);
+		document.ondragend =function(e){e.preventDefault();}
+					// 不执行默认处理（默认拒绝被拖放）
+		document.ondragover =function(e){e.preventDefault();}
+					// 停止事件传播
+	</script>
+</body>
+</html>

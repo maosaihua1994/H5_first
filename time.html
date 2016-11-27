@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day04</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			margin: 0 auto;
+			background:skyblue;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="600" id="can">	
+	</canvas>
+	<script type="text/javascript">
+		var can = document.getElementById("can");
+		var ca = can.getContext("2d");
+		function getT(){
+			var date = new Date();
+			var h = date.getHours();
+			var m = date.getMinutes();
+			var k = date.getSeconds();
+			console.log("当前时间"+h+":"+m+":"+k);
+
+			//清除画布clearRect();
+			ca.clearRect(0,0,500,500);
+			ca.beginPath();
+			ca.strokeStyle = "#000";
+			ca.lineWidth = 3;
+			ca.arc(300,300,150,360*Math.PI/180,false);
+			ca.stroke();
+			ca.closePath();
+			// 时针
+			console.log("时针走的度数"+(h*30+m*0.5+k*0.5/60));
+			ca.beginPath();
+			ca.save();
+			ca.translate(300,300);
+			ca.rotate((h*30+m*0.5+k*0.5/60)*Math.PI/180);
+			ca.lineWidth = 2;
+			ca.strokeStyle = "red";
+			ca.moveTo(0,0);
+			ca.lineTo(0,-60);
+			ca.stroke();
+			ca.restore();
+			ca.closePath();
+		
+			//分针
+			ca.beginPath();
+			ca.save();
+			ca.translate(300,300);
+			ca.rotate((m*6+k*0.5/60)*Math.PI/180);
+			ca.lineWidth = 1;
+			ca.strokeStyle = "green";
+			ca.moveTo(0,0);
+			ca.lineTo(0,-80);
+			ca.stroke();
+			ca.restore();
+			ca.closePath();
+		
+			//秒针
+			ca.beginPath();
+			ca.save();
+			ca.translate(300,300);
+			ca.rotate(k*6*Math.PI/180);
+			ca.lineWidth = 1;
+			ca.strokeStyle = "blue";
+			ca.moveTo(0,0);
+			ca.lineTo(0,-100);
+			ca.stroke();
+			ca.restore();
+			ca.closePath();
+
+		//短的刻度线，60个
+		for(var i=1;i<=60;i++){
+			var  s = 0;
+			s =i*6;
+			if(s%5==0){
+				ca.save();
+				ca.translate(300,300);
+				ca.rotate(s*Math.PI/180);
+				ca.beginPath();
+				ca.lineWidth = 3;
+				ca.strokeStyle = "red";
+				ca.moveTo(0,-150);
+				ca.lineTo(0,-130);
+				ca.stroke();
+				ca.restore();
+				ca.closePath();
+			}else{
+				ca.save();
+				ca.translate(300,300);
+				ca.rotate(s*Math.PI/180);
+				ca.beginPath();
+				ca.lineWidth = 2;
+				ca.strokeStyle = "#000";
+				ca.moveTo(0,-150);
+				ca.lineTo(0,-140);
+				ca.stroke();
+				ca.restore();
+				ca.closePath();
+			}
+			// // 时间刻度的数字
+			for(var a=1;a<=12;a++){
+				ca.save();
+				ca.translate(300,300);
+				ca.rotate(a*30*Math.PI/180);
+				ca.beginPath();
+				ca.lineWidth = 3;
+				ca.strokeStyle = "red";
+				ca.fillText(a,0,-120);
+				ca.closePath();
+				ca.restore();
+
+			}
+			
+		}
+		}
+		getT();
+		setInterval("getT()",1000);
+
+		
+	</script>
+</body>
+</html>

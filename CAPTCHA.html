@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- 显示火狐图标 -->
+	<link rel="shortcut icon" type="image/xy-icon" href="./img/firefox.ico">
+	<title>登录</title>
+	
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			color: #000;
+			font-size: 20px;
+			text-indent: 2px;
+		}
+		body{
+			background-image:url(./img/skin-blue.jpg); 
+			background-repeat: no-repeat;
+			background-size: 100%,100%;
+			/*background:rgba(0,0,0,0.5);*/
+		}
+		#div{
+			width: 650px;
+			height: 350px;
+			background: rgba(0,0,0,0.5);
+			margin:100px 0px 0px 30px;
+		}
+		.clear{
+			clear: both;
+		}
+		#div>h2{
+			color: #fff;
+			text-shadow: 5px 5px 8px #fff;
+			font-size: 35px;
+			position: relative;
+			margin-top: 30px;
+			margin-left: 20px;
+					
+		}
+
+		#div p{
+			line-height: 60px;
+			margin-top: 30px;
+			margin-left: 20px;
+			
+		}
+		input{
+			height: 50px;
+			/*输入框的字，往内间距5px*/
+			padding-left:5px;
+		}
+		input[type="email"]{
+			width:500px;
+			background: rgba(255,255,255,0.5);
+			border:none;
+		}
+		/*输入验证码*/
+		#text{
+			width:300px;
+			background: rgba(255,255,255,0.5);
+			border:none;
+		}
+		/*显示验证码*/
+		#t{
+
+			margin-left: 20px;
+			width:170px;
+			background: #58567A;
+			border:none;
+		}
+		input[type="submit"]{
+			width:100px;
+
+		}
+		canvas{
+			background: rgba(255,255,255,0.5);
+			/*background: rgba(255,255,255,c);*/
+			position: absolute;
+			margin-left: 20px;
+			margin-top: 5px;
+
+		}
+	</style>
+</head>
+<body>
+	<div id="div">
+		<h2>登录</h2>
+		
+		<div>
+			<form action="index.html" method="post" onsubmit ="return showD()">
+				<p class="p"><input type="email" placeholder="请输入邮箱账号" required id="email" ></p>
+				<p><input type="text" placeholder="请输入验证码" id="text" value="" required >
+				<canvas width="170px" height="50px" id="myCanvas" onclick="Cancas()">
+				</canvas>
+				<!-- <input type="text" readonly value="343" id="t" onclick="showT()"> --></p>
+				<p><input type="submit" value="登录" ></p>
+
+			</form>
+			
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	
+		var arr = ["a","b","c","d",'e','f','g','h','i','j','k','l','m','n',"o",'p','q','r','s','t','u','v','w','x','y','z',0,1,2,3,4,5,6,7,8,9];
+		var math1 = Math.round(Math.random()*35);
+		// 随机四个字母
+		var math2 = Math.round(Math.random()*35);
+		var math3 = Math.round(Math.random()*35);
+		var math4 = Math.round(Math.random()*35);
+		// 利用canvas画验证码的区域
+		var my = document.getElementById("myCanvas");
+		var mc = my.getContext("2d");
+		// 初始验证码的内容
+		mc.beginPath();
+		mc.fillStyle = "rgba(255,0,0,0.4)";
+		mc.font = "15px Arial";
+		mc.fillText("点击图片获取验证码",10,30);
+		mc.closePath();
+
+		// 点击图片的函数
+		function Cancas(){
+			// 随机四个字母
+			math1 = Math.round(Math.random()*35);
+			math2 = Math.round(Math.random()*35);
+			math3 = Math.round(Math.random()*35);
+			math4 = Math.round(Math.random()*35);
+			// 清除画布
+			mc.clearRect(0,0,170,50);
+			//随机获取颜色
+			var c1 =Math.round(Math.random()*255);
+			var c2 =Math.round(Math.random()*255);
+			var c3 =Math.round(Math.random()*255);
+			var c4 =Math.round(Math.random()*255);
+			mc.beginPath();
+			mc.fillStyle = "rgba("+c2+","+c3+","+c1+",0.5)";
+			// 定义一个矩形
+			mc.fillRect(0,0,170,50);
+			mc.closePath();
+			// 验证码的四个数字
+			mc.beginPath();
+			mc.font = "30px Arial";
+			mc.fillStyle = "rgba("+c1+","+c2+","+c3+",1)";
+			// 因为c1为字符串，放在rgba中为字符串量，把它转换为变量就加上"+c1+"
+			mc.fillText(arr[math1],20,25);
+			mc.fillStyle = "rgba("+c2+","+c1+","+c3+",1)";
+			mc.fillText(arr[math2],50,35);
+			mc.fillStyle = "rgba("+c3+","+c2+","+c1+",1)";
+			mc.fillText(arr[math3],80,40);
+			mc.fillStyle = "rgba("+c3+","+c1+","+c2+",1)";
+			mc.fillText(arr[math4],110,25);
+			mc.fill();
+			mc.closePath();
+
+		}
+		// 点击登录后，提交信息后return的函数
+		function showD(){
+
+			// 获取email的value值
+			var email = document.getElementById("email").value;
+			console.log(email);
+			// 获取随机出的验证码的四个数
+			var math=arr[math1]+""+arr[math2]+""+arr[math3]+""+arr[math4];
+			// 获取输入验证码的值
+			var text = document.getElementById("text").value;
+			console.log(math);
+			console.log(text);
+			console.log(math==text);
+			// 定义一个变量submitOK，如果为false，则不能提交，若为true则可以提交并跳转到test.html页面
+			var submitOK="";
+			// 判断输入的验证码与随机显示的验证码是否相同，若相同则submitOK=true，否则，反之。
+			if(math==text){
+				alert("验证码ok")
+				submitOK="true";
+			}else{
+				alert("验证码no");
+				submitOK="false";
+			}
+			// 判断submitOK的值
+			if (submitOK=="false")
+			 {
+				 alert("验证码错误");
+				 Cancas();
+				 return false;
+			 }
+			 
+		}
+	
+	</script>
+</body>
+</html>
+
+
+<!--  函数里最后你要什么，就return 什么 ，要记得去拿个值，去接return的值
+	在函数里传入参数为透明度，最后在调用函数时写入参数值
+
+	小写字母每一个都拿出来，用forEach(),转换为大写字母
+	给数字定义一个数字，把三个数组用con 拼接成一个数组
+
+	数字显示四次，用for循环 注意数字的距离 左右，上下距离
+	数字大小随机
+
+	用str+=f,进行拼接
+
+	如何不区分大小写，把获得的验证码的值转为小写
+-->
